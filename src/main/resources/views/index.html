@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt_BR" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="/fragment/head"></head>
+<body>
+    <header th:include="/fragment/banner"></header>
+    <main id="blog" class="container-fluid">
+        <section class="row">
+            <aside th:replace="/fragment/profile"></aside>
+            <article class="col-12 col-md-9 col-lg-10 p-5 bg-lighter">
+                <div id="posts" class="col-12 col-md-10 col-lg-8 m-auto p-2">
+                    <h1>Minhas Postagens</h1>
+                </div>
+            </article>
+        </section>
+    </main>
+    <script th:replace="/fragment/script"></script>
+</body>
+</html>

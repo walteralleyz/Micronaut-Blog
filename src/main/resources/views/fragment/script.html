@@ -1,0 +1,48 @@
+<script async defer>
+    let posts = document.getElementById("posts");
+
+    fetch("./api/article")
+        .then(res => res.json())
+        .then(data => {
+            for(let d of data.content)
+                posts.appendChild(createPosts(d));
+        });
+
+    function createPosts(data) {
+        let [ container, body, date, dateLight, title, text, button ] = newMultipleEl(
+            "div", "div", "small", "mark", "h1", "p", "a"
+        );
+
+        button.setAttribute("href", `./post/${data.id}`);
+
+        addClassAndAppend(["card", "my-4"], [body], container);
+        addClassAndAppend(["card-body"], [date, title, text, button], body);
+        addClassAndAppend(["float-right"], [dateLight], date);
+
+        dateLight.textContent = `${data.lastUpdated[2]}/${data.lastUpdated[1]}/${data.lastUpdated[0]}`;
+
+        addClassAndContent(["card-title"], data.title, title);
+        addClassAndContent(["card-text"], data.text.substring(0, 100), text);
+        addClassAndContent(["btn", "btn-danger"], "Leia mais...", button);
+
+        return container;
+    }
+
+    function addClassAndContent(cls, content, obj) {
+        obj.classList.add(...cls);
+        obj.textContent = content;
+    }
+
+    function addClassAndAppend(cls, children, obj) {
+        obj.classList.add(...cls);
+        obj.append(...children);
+    }
+
+    function newEl(name) {
+        return document.createElement(name);
+    }
+
+    function newMultipleEl(...names) {
+        return names.map(name => newEl(name));
+    }
+</script>
